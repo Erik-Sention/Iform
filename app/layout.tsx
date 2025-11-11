@@ -5,6 +5,9 @@ import { AuthProvider } from "@/components/AuthProvider";
 export const metadata: Metadata = {
   title: "iForm - Kostprogram",
   description: "Personligt anpassat kostprogram",
+  icons: {
+    icon: "/images/Aktivitus-Blue.png",
+  },
 };
 
 export default function RootLayout({
