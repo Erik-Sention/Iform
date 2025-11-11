@@ -13,14 +13,13 @@ export default function RecipeCard({ recipe, client1Name = "P1", client2Name = "
   return (
     <div className="bg-white rounded-b-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
       {/* Recipe image */}
-      <div className="relative w-full h-56 bg-gradient-to-br from-accent-100 to-blue-100 overflow-hidden">
+      <div className="relative w-full h-56 bg-gradient-to-br from-accent-100 to-blue-100">
         {recipe.image ? (
           <Image
             src={recipe.image}
             alt={recipe.title}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-6xl font-bold text-accent-300 opacity-40">

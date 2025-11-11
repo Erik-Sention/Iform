@@ -123,8 +123,10 @@ export default function PrintButton({ contentRef }: PrintButtonProps) {
           break-before: auto;
           display: block;
           position: relative;
-          width: 100%;
-          margin-bottom: 0;
+          width: 100% !important;
+          max-width: 100% !important;
+          margin: 0 !important;
+          padding: 0 !important;
         }
         
         /* Ta bort page-break-after från sista receptet */
@@ -135,12 +137,12 @@ export default function PrintButton({ contentRef }: PrintButtonProps) {
         
         /* Skala ner recept för att passa på sidan */
         .print-recipe-card > div {
-          transform: scale(0.90);
+          transform: scale(0.92);
           transform-origin: top left;
-          width: 111%;
-          margin-bottom: 1rem;
-          margin-left: 0 !important;
-          margin-right: 0 !important;
+          width: 108.7% !important;
+          max-width: 108.7% !important;
+          margin: 0 !important;
+          padding: 0 !important;
         }
         
         /* Optimera receptkort för print */
@@ -153,67 +155,37 @@ export default function PrintButton({ contentRef }: PrintButtonProps) {
         img {
           page-break-inside: avoid;
           break-inside: avoid;
-          max-width: 100%;
-          height: auto;
         }
         
-        /* Bildcontainers ska ta upp hela bredden i print - kompensera för transform scale(0.90) */
-        .print-recipe-card > div > div:first-child {
-          width: 111.11% !important; /* Kompensera för 0.90 scale (100% / 0.90 = 111.11%) */
-          margin-left: 0 !important;
-          margin-right: 0 !important;
-          padding-left: 0 !important;
-          padding-right: 0 !important;
-          border-radius: 0 !important;
-          left: 0 !important;
-          right: 0 !important;
-          transform: none !important; /* Ta bort eventuell transform från bildcontainern */
+        /* Textinnehåll får lite extra padding för balans */
+        .print-recipe-card > div > div > div {
+          padding-left: 3rem !important;
+          padding-right: 3rem !important;
         }
         
-        /* Next.js Image med fill prop ska ta upp hela bredden */
-        .print-recipe-card > div > div:first-child > img,
-        .print-recipe-card > div > div:first-child > span,
-        .print-recipe-card > div > div:first-child > span > img {
-          width: 100% !important;
-          height: 100% !important;
-          left: 0 !important;
-          right: 0 !important;
-          object-fit: cover !important;
+        /* Recepttitel */
+        .print-recipe-card h3 {
+          text-align: center !important;
+          margin-bottom: 1.5rem !important;
         }
         
-        /* Titelsidans bild ska ta upp hela bredden */
-        .title-page-image {
-          width: 100% !important;
-          margin-left: 0 !important;
-          margin-right: 0 !important;
-          padding-left: 0 !important;
-          padding-right: 0 !important;
-          border-radius: 0 !important;
+        /* Sektionsrubriker - Ingredienser och Instruktioner */
+        .print-recipe-card h4 {
+          text-align: center !important;
+          margin-bottom: 1rem !important;
         }
         
-        .title-page-image img,
-        .title-page-image span,
-        .title-page-image span img {
-          width: 100% !important;
-          height: 100% !important;
+        /* Tabeller ska ha bättre spacing */
+        .print-recipe-card table {
+          margin-left: auto !important;
+          margin-right: auto !important;
+          max-width: 90% !important;
         }
         
-        /* Se till att receptkort tar upp hela bredden */
-        .print-recipe-card {
-          width: 100% !important;
-          margin-left: 0 !important;
-          margin-right: 0 !important;
-          padding-left: 0 !important;
-          padding-right: 0 !important;
-        }
-        
-        /* Ta bort border-radius från receptkort i print */
-        .print-recipe-card > div {
-          border-radius: 0 !important;
-        }
-        
-        .print-recipe-card > div > div {
-          border-radius: 0 !important;
+        /* Instruktionslista */
+        .print-recipe-card ol {
+          padding-left: 2rem !important;
+          padding-right: 1rem !important;
         }
         
         /* Behåll färger och bakgrunder */
@@ -262,6 +234,9 @@ export default function PrintButton({ contentRef }: PrintButtonProps) {
         /* Grid ska vara 1 kolumn vid print */
         .grid {
           display: block !important;
+          gap: 0 !important;
+          padding: 0 !important;
+          margin: 0 !important;
         }
         
         /* Tabeller ska inte brytas */
