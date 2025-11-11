@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useReactToPrint } from "react-to-print";
 
 interface PrintButtonProps {
@@ -11,15 +11,35 @@ interface PrintButtonProps {
 
 export default function PrintButton({ contentRef, imagesLoaded, loadingProgress = 0 }: PrintButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [isWaitingForImages, setIsWaitingForImages] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const shouldPrintRef = useRef(false);
 
   const clearLoading = () => {
     setIsLoading(false);
+    setIsWaitingForImages(false);
+    shouldPrintRef.current = false;
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
   };
+
+  // Automatiskt trigga print när bilder är klara (om användaren har klickat)
+  useEffect(() => {
+    if (shouldPrintRef.current && imagesLoaded && isWaitingForImages) {
+      setIsWaitingForImages(false);
+      // Liten fördröjning för att säkerställa att alla bilder verkligen är redo
+      setTimeout(() => {
+        if (handlePrintRef.current) {
+          handlePrintRef.current();
+        }
+        shouldPrintRef.current = false;
+      }, 100);
+    }
+  }, [imagesLoaded, isWaitingForImages]);
+
+  const handlePrintRef = useRef<(() => void) | null>(null);
 
   const handlePrint = useReactToPrint({
     contentRef,
@@ -269,16 +289,30 @@ export default function PrintButton({ contentRef, imagesLoaded, loadingProgress 
     `,
   });
 
-  // Inaktivera knappen om bilder fortfarande laddar eller om print pågår
-  const isDisabled = !imagesLoaded || isLoading;
+  // Spara handlePrint i ref för att kunna använda i useEffect
+  handlePrintRef.current = handlePrint;
+
+  const handleButtonClick = () => {
+    if (imagesLoaded) {
+      // Om bilder är laddade, öppna print-dialogen direkt
+      handlePrint();
+    } else {
+      // Om bilder inte är laddade, köa print-operationen
+      shouldPrintRef.current = true;
+      setIsWaitingForImages(true);
+    }
+  };
+
+  // Inaktivera knappen endast när print pågår
+  const isDisabled = isLoading;
 
   return (
     <button
-      onClick={() => handlePrint()}
+      onClick={handleButtonClick}
       disabled={isDisabled}
       className="no-print px-6 py-3 bg-white text-accent-700 font-semibold rounded-xl hover:bg-blue-50 transition-colors shadow-md hover:shadow-lg flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
     >
-      {!imagesLoaded ? (
+      {isWaitingForImages ? (
         <>
           <svg
             className="animate-spin h-5 w-5"
@@ -300,7 +334,7 @@ export default function PrintButton({ contentRef, imagesLoaded, loadingProgress 
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             ></path>
           </svg>
-          Laddar bilder... {loadingProgress}%
+          Väntar på bilder... {loadingProgress}%
         </>
       ) : isLoading ? (
         <>
