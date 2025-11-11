@@ -14,7 +14,8 @@ export default function PrintButton({ contentRef }: PrintButtonProps) {
     pageStyle: `
       @page {
         size: A4;
-        margin: 12mm;
+        margin: 0;
+        padding: 0;
       }
       
       @media print {
@@ -24,6 +25,8 @@ export default function PrintButton({ contentRef }: PrintButtonProps) {
           color-adjust: exact;
           height: auto;
           overflow: visible;
+          margin: 0 !important;
+          padding: 0 !important;
         }
 
         /* Bakgrundsbild som syns på varje sida */
