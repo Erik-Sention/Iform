@@ -1,0 +1,158 @@
+{
+  "excelFilePath": "./Period 1.xlsx",
+  "period1": {
+    "title": {
+      "cell": "B2"
+    },
+    "clients": [
+      {
+        "name": "C7",
+        "vikt": "G7",
+        "fett": "I7"
+      },
+      {
+        "name": "C9",
+        "vikt": "G9",
+        "fett": "I9"
+      }
+    ],
+    "metrics": {
+      "fruktKcalPerDag": {
+        "p1Cell": "I51",
+        "p2Cell": "K51"
+      },
+      "friaKcalPerVecka": {
+        "p1Cell": "I53",
+        "p2Cell": "K53"
+      },
+      "extraKHInforHI": {
+        "p1Cell": "I60",
+        "p2Cell": "K60"
+      },
+      "KHUnderLangtPass": {
+        "p1Cell": "I62",
+        "p2Cell": "K62"
+      }
+    },
+    "info": {
+      "startRow": 13,
+      "endRow": 43,
+      "column": "C"
+    },
+    "recipes": {
+      "startRow": 155,
+      "idColumn": "A",
+      "titleColumn": "B",
+      "instructionsColumn": "B",
+      "ingredientsColumn": "E",
+      "p1GramColumn": "N",
+      "p2GramColumn": "O",
+      "totalGramColumn": "P",
+      "recipes": [
+        {
+          "id": "A1",
+          "row": 155,
+          "ingredientRows": [157, 158, 159, 160, 161, 162, 163, 164],
+          "instructionRows": [157, 158, 160, 162]
+        },
+        {
+          "id": "A2",
+          "row": 168,
+          "ingredientRows": [170, 171, 172, 173, 174, 175],
+          "instructionRows": [170, 171, 173, 175]
+        },
+        {
+          "id": "A3",
+          "row": 181,
+          "ingredientRows": [183, 184, 185, 186, 187, 188],
+          "instructionRows": [182, 184, 186, 188]
+        },
+        {
+          "id": "A4",
+          "row": 194,
+          "ingredientRows": [196, 197, 198, 199, 200, 201, 202, 203],
+          "instructionRows": [196, 197, 199, 201, 202]
+        },
+        {
+          "id": "A5",
+          "row": 207,
+          "ingredientRows": [209, 210, 211, 212, 213, 214, 215, 216, 217, 218],
+          "instructionRows": [209, 211, 213, 215]
+        },
+        {
+          "id": "A6",
+          "row": 220,
+          "ingredientRows": [222, 223, 224, 225, 226, 227],
+          "instructionRows": [222, 224]
+        },
+        {
+          "id": "A7",
+          "row": 233,
+          "ingredientRows": [235, 236, 237, 238, 239, 240, 241],
+          "instructionRows": [234, 236, 238]
+        },
+        {
+          "id": "A8",
+          "row": 246,
+          "ingredientRows": [248, 249, 250, 251, 252, 253, 254],
+          "instructionRows": [248, 250, 252, 253]
+        },
+        {
+          "id": "B1",
+          "row": 264,
+          "ingredientRows": [266, 267, 268, 269, 270, 271, 272],
+          "instructionRows": [266, 267, 269, 270]
+        },
+        {
+          "id": "B2",
+          "row": 277,
+          "ingredientRows": [279, 280, 281, 282],
+          "instructionRows": [279, 282]
+        },
+        {
+          "id": "B3",
+          "row": 289,
+          "ingredientRows": [292, 293, 294, 295, 296],
+          "instructionRows": [291, 292, 294]
+        },
+        {
+          "id": "B4",
+          "row": 303,
+          "ingredientRows": [305, 306, 307, 308, 309, 310],
+          "instructionRows": [304, 305, 307]
+        },
+        {
+          "id": "B5",
+          "row": 316,
+          "ingredientRows": [318, 319, 320, 321, 322, 323, 324],
+          "instructionRows": [318, 320, 321]
+        },
+        {
+          "id": "B6",
+          "row": 329,
+          "ingredientRows": [331, 332, 333, 334],
+          "instructionRows": [330, 331, 333]
+        },
+        {
+          "id": "B7",
+          "row": 342,
+          "ingredientRows": [344, 345, 346, 347, 348, 349, 350],
+          "instructionRows": [343, 344, 346, 348]
+        }
+      ]
+    },
+    "snacks": {
+      "A": {
+        "startRow": 363,
+        "endRow": 366,
+        "column": "B"
+      },
+      "B": {
+        "startRow": 372,
+        "endRow": 374,
+        "column": "B"
+      }
+    }
+  }
+}
+
