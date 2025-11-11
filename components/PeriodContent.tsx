@@ -107,7 +107,7 @@ export default function PeriodContent({ initialData }: PeriodContentProps) {
           </div>
 
           <div className="print-avoid-break">
-            <WeekSchedule schedule={data.schedule} />
+            <WeekSchedule schedule={data.schedule} weeks={data.weeks} />
           </div>
 
           <div className="print-avoid-break mb-8">

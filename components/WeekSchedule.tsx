@@ -2,10 +2,12 @@ import { WeekSchedule as WeekScheduleType } from "@/types";
 
 interface WeekScheduleProps {
   schedule: WeekScheduleType;
+  weeks?: string;
 }
 
 export default function WeekSchedule({
   schedule,
+  weeks,
 }: WeekScheduleProps) {
   const days = [
     "måndag",
@@ -27,10 +29,12 @@ export default function WeekSchedule({
     söndag: "Söndag",
   };
 
+  const weekText = weeks ? `Veckoschema (${weeks})` : "Veckoschema";
+
   return (
     <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
       <h2 className="text-3xl font-bold text-gray-900 mb-6">
-        Veckoschema (vecka 1–2)
+        {weekText}
       </h2>
 
       <div className="space-y-6">
