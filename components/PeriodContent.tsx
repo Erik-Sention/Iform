@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PeriodData } from "@/types";
@@ -12,6 +12,7 @@ import RecipeCard from "@/components/RecipeCard";
 import SnacksSection from "@/components/SnacksSection";
 import ExcelUploader from "@/components/ExcelUploader";
 import PrintButton from "@/components/PrintButton";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
 
 interface PeriodContentProps {
   initialData: PeriodData;
@@ -34,6 +35,25 @@ export default function PeriodContent({ initialData }: PeriodContentProps) {
   const recipesA = data.recipes.filter((r) => r.category === "A");
   const recipesB = data.recipes.filter((r) => r.category === "B");
 
+  // Samla alla bild-URLs som behöver laddas för PDF
+  const imageUrls = useMemo(() => {
+    const staticImages = [
+      "/images/AktivtusBackgroundGrey.png",
+      "/images/Aktivitus_Article_HälsaOPrestation.png",
+      "/images/Aktivitus-Blue.png",
+    ];
+
+    // Lägg till alla recept-bilder
+    const recipeImages = data.recipes
+      .map((recipe) => recipe.image)
+      .filter((image): image is string => Boolean(image));
+
+    return [...staticImages, ...recipeImages];
+  }, [data.recipes]);
+
+  // Använd image preloader hook
+  const { allImagesLoaded, loadingProgress } = useImagePreloader(imageUrls);
+
   return (
     <main className="min-h-screen" style={{ backgroundColor: '#F7F5F2' }}>
       <div className="container mx-auto px-4 py-12 max-w-7xl">
@@ -50,7 +70,13 @@ export default function PeriodContent({ initialData }: PeriodContentProps) {
           <ExcelUploader 
             onDataLoaded={handleDataLoaded} 
             currentRecipes={data.recipes}
-            printButton={<PrintButton contentRef={printRef} />}
+            printButton={
+              <PrintButton 
+                contentRef={printRef} 
+                imagesLoaded={allImagesLoaded}
+                loadingProgress={loadingProgress}
+              />
+            }
           />
         </div>
 
