@@ -40,7 +40,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     router.push('/login');
   };
 
+  // Visa ingenting medan vi laddar
   if (isLoading) {
+    return null;
+  }
+
+  // Om användaren inte är inloggad och inte är på login-sidan, visa ingenting
+  // (redirecten kommer att hända från useEffect)
+  if (!isAuth && pathname !== '/login') {
     return null;
   }
 
