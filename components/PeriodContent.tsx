@@ -35,7 +35,7 @@ export default function PeriodContent({ initialData }: PeriodContentProps) {
   const recipesB = data.recipes.filter((r) => r.category === "B");
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <main className="min-h-screen" style={{ backgroundColor: '#F7F5F2' }}>
       <div className="container mx-auto px-4 py-12 max-w-7xl">
         <div className="mb-8 no-print">
           <Link
