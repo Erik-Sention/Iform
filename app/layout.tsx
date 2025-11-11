@@ -3,10 +3,10 @@ import "./globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
 
 export const metadata: Metadata = {
-  title: "iForm - Kostprogram",
+  title: "Aktivitus - Iform",
   description: "Personligt anpassat kostprogram",
   icons: {
-    icon: "/images/Aktivitus-Blue.png",
+    icon: "/images/aktivitus-blue-favicon.png",
   },
 };
 
