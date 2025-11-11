@@ -62,9 +62,9 @@ export default function HeaderCard({
                 {client1Name}: {Math.round(metrics.fruktKcalPerDag[0])} kcal
               </p>
               {hasClient2 && (
-                <p className="text-gray-900 font-semibold">
+              <p className="text-gray-900 font-semibold">
                   {client2Name}: {Math.round(metrics.fruktKcalPerDag[1])} kcal
-                </p>
+              </p>
               )}
             </div>
           </div>
@@ -78,9 +78,9 @@ export default function HeaderCard({
                 {client1Name}: {Math.round(metrics.friaKcalPerVecka[0])} kcal
               </p>
               {hasClient2 && (
-                <p className="text-gray-900 font-semibold">
+              <p className="text-gray-900 font-semibold">
                   {client2Name}: {Math.round(metrics.friaKcalPerVecka[1])} kcal
-                </p>
+              </p>
               )}
             </div>
           </div>
@@ -94,9 +94,9 @@ export default function HeaderCard({
                 {client1Name}: {Math.round(metrics.extraKHInforHI[0])} g
               </p>
               {hasClient2 && (
-                <p className="text-gray-900 font-semibold">
+              <p className="text-gray-900 font-semibold">
                   {client2Name}: {Math.round(metrics.extraKHInforHI[1])} g
-                </p>
+              </p>
               )}
             </div>
           </div>
@@ -110,9 +110,9 @@ export default function HeaderCard({
                 {client1Name}: {Math.round(metrics.KHUnderLangtPass[0])} g/h
               </p>
               {hasClient2 && (
-                <p className="text-gray-900 font-semibold">
+              <p className="text-gray-900 font-semibold">
                   {client2Name}: {Math.round(metrics.KHUnderLangtPass[1])} g/h
-                </p>
+              </p>
               )}
             </div>
           </div>

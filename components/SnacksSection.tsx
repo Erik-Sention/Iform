@@ -30,12 +30,12 @@ export default function SnacksSection({ snacks, client1Name, client2Name }: Snac
                   </th>
                   {hasClient2 && (
                     <>
-                      <th className="text-right py-2 px-3 text-gray-800 font-semibold">
-                        {client2Name}
-                      </th>
-                      <th className="text-right py-2 px-3 text-gray-800 font-semibold">
-                        Totalt
-                      </th>
+                  <th className="text-right py-2 px-3 text-gray-800 font-semibold">
+                    {client2Name}
+                  </th>
+                  <th className="text-right py-2 px-3 text-gray-800 font-semibold">
+                    Totalt
+                  </th>
                     </>
                   )}
                 </tr>
@@ -52,12 +52,12 @@ export default function SnacksSection({ snacks, client1Name, client2Name }: Snac
                     </td>
                     {hasClient2 && (
                       <>
-                        <td className="py-2 px-3 text-right text-gray-800 font-medium">
-                          {Math.round(snack.p2)} g
-                        </td>
-                        <td className="py-2 px-3 text-right text-gray-900 font-semibold">
-                          {Math.round(snack.tot)} g
-                        </td>
+                    <td className="py-2 px-3 text-right text-gray-800 font-medium">
+                      {Math.round(snack.p2)} g
+                    </td>
+                    <td className="py-2 px-3 text-right text-gray-900 font-semibold">
+                      {Math.round(snack.tot)} g
+                    </td>
                       </>
                     )}
                   </tr>
@@ -83,12 +83,12 @@ export default function SnacksSection({ snacks, client1Name, client2Name }: Snac
                   </th>
                   {hasClient2 && (
                     <>
-                      <th className="text-right py-2 px-3 text-gray-800 font-semibold">
-                        {client2Name}
-                      </th>
-                      <th className="text-right py-2 px-3 text-gray-800 font-semibold">
-                        Totalt
-                      </th>
+                  <th className="text-right py-2 px-3 text-gray-800 font-semibold">
+                    {client2Name}
+                  </th>
+                  <th className="text-right py-2 px-3 text-gray-800 font-semibold">
+                    Totalt
+                  </th>
                     </>
                   )}
                 </tr>
@@ -105,12 +105,12 @@ export default function SnacksSection({ snacks, client1Name, client2Name }: Snac
                     </td>
                     {hasClient2 && (
                       <>
-                        <td className="py-2 px-3 text-right text-gray-800 font-medium">
-                          {Math.round(snack.p2)} g
-                        </td>
-                        <td className="py-2 px-3 text-right text-gray-900 font-semibold">
-                          {Math.round(snack.tot)} g
-                        </td>
+                    <td className="py-2 px-3 text-right text-gray-800 font-medium">
+                      {Math.round(snack.p2)} g
+                    </td>
+                    <td className="py-2 px-3 text-right text-gray-900 font-semibold">
+                      {Math.round(snack.tot)} g
+                    </td>
                       </>
                     )}
                   </tr>
