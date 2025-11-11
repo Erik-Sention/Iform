@@ -40,7 +40,7 @@ export default function HomePage() {
             />
           </div>
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            iForm
+            IForm
           </h1>
           <p className="text-xl text-gray-700">
             Välj vilken period du vill skapa en PDF för
