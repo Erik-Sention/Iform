@@ -52,16 +52,22 @@ export default function ExcelUploader({ onDataLoaded, currentRecipes, printButto
       console.log('📄 Använder sheet:', sheetName);
 
       // Extrahera klientdata
-      const client1Name = String(getCellValue(worksheet, "C7") || "");
+      const client1Name = String(getCellValue(worksheet, "C7") || "").trim();
       const client1Vikt = getCellValue(worksheet, "G7");
       const client1Fett = getCellValue(worksheet, "I7");
       
-      const client2Name = String(getCellValue(worksheet, "C9") || "");
+      const client2Name = String(getCellValue(worksheet, "C9") || "").trim();
       const client2Vikt = getCellValue(worksheet, "G9");
       const client2Fett = getCellValue(worksheet, "I9");
       
+      // Identifiera om klient 2 finns (om namnet är tomt eller alla värden är 0)
+      const hasClient2 = client2Name.length > 0 && (
+        Number(client2Vikt) > 0 || 
+        Number(client2Fett) > 0
+      );
+      
       console.log('👤 Klient 1:', { name: client1Name, vikt: client1Vikt, fett: client1Fett });
-      console.log('👤 Klient 2:', { name: client2Name, vikt: client2Vikt, fett: client2Fett });
+      console.log('👤 Klient 2:', { name: client2Name, vikt: client2Vikt, fett: client2Fett, exists: hasClient2 });
       
       const clients = [
         {
@@ -70,7 +76,7 @@ export default function ExcelUploader({ onDataLoaded, currentRecipes, printButto
           fettProcent: Number(client1Fett) || 0,
         },
         {
-          name: client2Name,
+          name: hasClient2 ? client2Name : "",
           viktKg: Number(client2Vikt) || 0,
           fettProcent: Number(client2Fett) || 0,
         },

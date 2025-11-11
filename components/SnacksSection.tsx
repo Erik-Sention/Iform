@@ -7,6 +7,8 @@ interface SnacksSectionProps {
 }
 
 export default function SnacksSection({ snacks, client1Name, client2Name }: SnacksSectionProps) {
+  const hasClient2 = client2Name && client2Name.length > 0;
+
   return (
     <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
       <h2 className="text-3xl font-bold text-gray-900 mb-6">Mellanmål</h2>
@@ -26,12 +28,16 @@ export default function SnacksSection({ snacks, client1Name, client2Name }: Snac
                   <th className="text-right py-2 px-3 text-gray-800 font-semibold">
                     {client1Name}
                   </th>
-                  <th className="text-right py-2 px-3 text-gray-800 font-semibold">
-                    {client2Name}
-                  </th>
-                  <th className="text-right py-2 px-3 text-gray-800 font-semibold">
-                    Totalt
-                  </th>
+                  {hasClient2 && (
+                    <>
+                      <th className="text-right py-2 px-3 text-gray-800 font-semibold">
+                        {client2Name}
+                      </th>
+                      <th className="text-right py-2 px-3 text-gray-800 font-semibold">
+                        Totalt
+                      </th>
+                    </>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -44,12 +50,16 @@ export default function SnacksSection({ snacks, client1Name, client2Name }: Snac
                     <td className="py-2 px-3 text-right text-gray-800 font-medium">
                       {Math.round(snack.p1)} g
                     </td>
-                    <td className="py-2 px-3 text-right text-gray-800 font-medium">
-                      {Math.round(snack.p2)} g
-                    </td>
-                    <td className="py-2 px-3 text-right text-gray-900 font-semibold">
-                      {Math.round(snack.tot)} g
-                    </td>
+                    {hasClient2 && (
+                      <>
+                        <td className="py-2 px-3 text-right text-gray-800 font-medium">
+                          {Math.round(snack.p2)} g
+                        </td>
+                        <td className="py-2 px-3 text-right text-gray-900 font-semibold">
+                          {Math.round(snack.tot)} g
+                        </td>
+                      </>
+                    )}
                   </tr>
                 ))}
               </tbody>
@@ -71,12 +81,16 @@ export default function SnacksSection({ snacks, client1Name, client2Name }: Snac
                   <th className="text-right py-2 px-3 text-gray-800 font-semibold">
                     {client1Name}
                   </th>
-                  <th className="text-right py-2 px-3 text-gray-800 font-semibold">
-                    {client2Name}
-                  </th>
-                  <th className="text-right py-2 px-3 text-gray-800 font-semibold">
-                    Totalt
-                  </th>
+                  {hasClient2 && (
+                    <>
+                      <th className="text-right py-2 px-3 text-gray-800 font-semibold">
+                        {client2Name}
+                      </th>
+                      <th className="text-right py-2 px-3 text-gray-800 font-semibold">
+                        Totalt
+                      </th>
+                    </>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -89,12 +103,16 @@ export default function SnacksSection({ snacks, client1Name, client2Name }: Snac
                     <td className="py-2 px-3 text-right text-gray-800 font-medium">
                       {Math.round(snack.p1)} g
                     </td>
-                    <td className="py-2 px-3 text-right text-gray-800 font-medium">
-                      {Math.round(snack.p2)} g
-                    </td>
-                    <td className="py-2 px-3 text-right text-gray-900 font-semibold">
-                      {Math.round(snack.tot)} g
-                    </td>
+                    {hasClient2 && (
+                      <>
+                        <td className="py-2 px-3 text-right text-gray-800 font-medium">
+                          {Math.round(snack.p2)} g
+                        </td>
+                        <td className="py-2 px-3 text-right text-gray-900 font-semibold">
+                          {Math.round(snack.tot)} g
+                        </td>
+                      </>
+                    )}
                   </tr>
                 ))}
               </tbody>

@@ -8,6 +8,8 @@ interface RecipeCardProps {
 }
 
 export default function RecipeCard({ recipe, client1Name = "P1", client2Name = "P2" }: RecipeCardProps) {
+  const hasClient2 = client2Name && client2Name.length > 0;
+
   return (
     <div className="bg-white rounded-b-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
       {/* Recipe image */}
@@ -46,12 +48,16 @@ export default function RecipeCard({ recipe, client1Name = "P1", client2Name = "
                   <th className="text-right py-2 px-3 text-gray-800 font-semibold">
                     {client1Name}
                   </th>
-                  <th className="text-right py-2 px-3 text-gray-800 font-semibold">
-                    {client2Name}
-                  </th>
-                  <th className="text-right py-2 px-3 text-gray-800 font-semibold">
-                    Totalt
-                  </th>
+                  {hasClient2 && (
+                    <>
+                      <th className="text-right py-2 px-3 text-gray-800 font-semibold">
+                        {client2Name}
+                      </th>
+                      <th className="text-right py-2 px-3 text-gray-800 font-semibold">
+                        Totalt
+                      </th>
+                    </>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -66,12 +72,16 @@ export default function RecipeCard({ recipe, client1Name = "P1", client2Name = "
                     <td className="py-2 px-3 text-right text-gray-800 font-medium">
                       {Math.round(ingredient.p1)} g
                     </td>
-                    <td className="py-2 px-3 text-right text-gray-800 font-medium">
-                      {Math.round(ingredient.p2)} g
-                    </td>
-                    <td className="py-2 px-3 text-right text-gray-900 font-semibold">
-                      {Math.round(ingredient.tot)} g
-                    </td>
+                    {hasClient2 && (
+                      <>
+                        <td className="py-2 px-3 text-right text-gray-800 font-medium">
+                          {Math.round(ingredient.p2)} g
+                        </td>
+                        <td className="py-2 px-3 text-right text-gray-900 font-semibold">
+                          {Math.round(ingredient.tot)} g
+                        </td>
+                      </>
+                    )}
                   </tr>
                 ))}
               </tbody>
