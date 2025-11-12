@@ -29,9 +29,20 @@ export default function RecipeCard({ recipe, client1Name = "P1", client2Name = "
       </div>
 
       <div className="p-6">
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">
-          {recipe.title}
-        </h3>
+        <div className="flex items-center gap-3 mb-4">
+          <h3 className="text-2xl font-bold text-gray-900">
+            {recipe.title}
+          </h3>
+          <span
+            className={`px-3 py-1 rounded-full text-sm font-bold uppercase ${
+              recipe.category === "A"
+                ? "bg-gray-200 text-gray-800"
+                : "bg-gray-300 text-gray-800"
+            }`}
+          >
+            {recipe.id.toUpperCase()}
+          </span>
+        </div>
 
         <div className="mb-6">
           <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3">

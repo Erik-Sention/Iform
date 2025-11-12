@@ -52,19 +52,17 @@ export default function RecipeSelector({
   const totalSelected = selectedRecipes.size;
 
   return (
-    <div className="bg-gradient-to-r from-blue-400 to-blue-500 text-white rounded-2xl shadow-lg p-6 mb-8">
+    <div className="bg-gradient-to-r from-blue-500 to-accent-600 text-white rounded-2xl shadow-lg p-6 mb-8">
       <div className="flex items-center justify-between">
         <div className="flex-1">
-          <h3 className="text-xl font-bold mb-1">
-            ✅ Välj recept för PDF-export
-          </h3>
-          <p className="text-blue-50 text-sm">
-            {totalSelected} av {recipes.length} recept valda (A: {selectedCountA}/{recipesA.length}, B: {selectedCountB}/{recipesB.length})
-          </p>
+          <h3 className="text-xl font-bold mb-2">✅ Välj recept för PDF-export</h3>
+          <div className="text-blue-50 text-sm space-y-1">
+            <p>{totalSelected} av {recipes.length} recept valda (A: {selectedCountA}/{recipesA.length}, B: {selectedCountB}/{recipesB.length})</p>
+          </div>
         </div>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="px-6 py-3 bg-white text-blue-700 font-semibold rounded-xl hover:bg-blue-50 transition-colors shadow-md hover:shadow-lg"
+          className="px-6 py-3 bg-white text-accent-700 font-semibold rounded-xl hover:bg-blue-50 transition-colors shadow-md hover:shadow-lg"
         >
           {isExpanded ? "Dölj" : "Visa val"}
         </button>
@@ -76,37 +74,37 @@ export default function RecipeSelector({
           <div className="flex gap-2 flex-wrap">
             <button
               onClick={() => handleSelectAll()}
-              className="px-4 py-2 bg-white text-blue-700 font-semibold rounded-lg hover:bg-blue-50 transition-colors text-sm"
+              className="px-4 py-2 bg-white text-accent-700 font-semibold rounded-lg hover:bg-blue-50 transition-colors text-sm"
             >
               Välj alla
             </button>
             <button
               onClick={() => handleDeselectAll()}
-              className="px-4 py-2 bg-blue-300 text-white font-semibold rounded-lg hover:bg-blue-400 transition-colors text-sm"
+              className="px-4 py-2 bg-white/20 text-white font-semibold rounded-lg hover:bg-white/30 transition-colors text-sm"
             >
               Avmarkera alla
             </button>
             <button
               onClick={() => handleSelectAll("A")}
-              className="px-4 py-2 bg-white text-blue-700 font-semibold rounded-lg hover:bg-blue-50 transition-colors text-sm"
+              className="px-4 py-2 bg-white text-accent-700 font-semibold rounded-lg hover:bg-blue-50 transition-colors text-sm"
             >
               Välj alla A
             </button>
             <button
               onClick={() => handleDeselectAll("A")}
-              className="px-4 py-2 bg-blue-300 text-white font-semibold rounded-lg hover:bg-blue-400 transition-colors text-sm"
+              className="px-4 py-2 bg-white/20 text-white font-semibold rounded-lg hover:bg-white/30 transition-colors text-sm"
             >
               Avmarkera alla A
             </button>
             <button
               onClick={() => handleSelectAll("B")}
-              className="px-4 py-2 bg-white text-blue-700 font-semibold rounded-lg hover:bg-blue-50 transition-colors text-sm"
+              className="px-4 py-2 bg-white text-accent-700 font-semibold rounded-lg hover:bg-blue-50 transition-colors text-sm"
             >
               Välj alla B
             </button>
             <button
               onClick={() => handleDeselectAll("B")}
-              className="px-4 py-2 bg-blue-300 text-white font-semibold rounded-lg hover:bg-blue-400 transition-colors text-sm"
+              className="px-4 py-2 bg-white/20 text-white font-semibold rounded-lg hover:bg-white/30 transition-colors text-sm"
             >
               Avmarkera alla B
             </button>
@@ -127,7 +125,12 @@ export default function RecipeSelector({
                     onChange={() => handleToggle(recipe.id)}
                     className="w-5 h-5 rounded border-2 border-white/50 text-blue-600 focus:ring-2 focus:ring-blue-300 cursor-pointer"
                   />
-                  <span className="text-sm font-medium">{recipe.title}</span>
+                  <div className="flex items-center gap-2 flex-1">
+                    <span className="text-xs font-bold bg-gray-200 text-gray-800 px-2 py-0.5 rounded uppercase">
+                      {recipe.id.toUpperCase()}
+                    </span>
+                    <span className="text-sm font-medium">{recipe.title}</span>
+                  </div>
                 </label>
               ))}
             </div>
@@ -148,7 +151,12 @@ export default function RecipeSelector({
                     onChange={() => handleToggle(recipe.id)}
                     className="w-5 h-5 rounded border-2 border-white/50 text-blue-600 focus:ring-2 focus:ring-blue-300 cursor-pointer"
                   />
-                  <span className="text-sm font-medium">{recipe.title}</span>
+                  <div className="flex items-center gap-2 flex-1">
+                    <span className="text-xs font-bold bg-gray-300 text-gray-800 px-2 py-0.5 rounded uppercase">
+                      {recipe.id.toUpperCase()}
+                    </span>
+                    <span className="text-sm font-medium">{recipe.title}</span>
+                  </div>
                 </label>
               ))}
             </div>

@@ -23,7 +23,7 @@ export default function HeaderCard({
         {title}
       </h1>
 
-      <div className={`grid gap-8 mb-8 ${hasClient2 ? 'md:grid-cols-2' : 'md:grid-cols-1 max-w-md mx-auto'}`}>
+      <div className={`grid gap-8 mb-12 client-grid ${hasClient2 ? 'md:grid-cols-2' : 'md:grid-cols-1 max-w-md mx-auto'}`}>
         {clients.filter(client => client.name.length > 0).map((client, idx) => (
           <div
             key={idx}
@@ -51,13 +51,14 @@ export default function HeaderCard({
       </div>
 
       <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-        <h3 className="text-xl font-bold text-gray-900 mb-6">Nyckeltal</h3>
-        <div className="space-y-6">
+        <h3 className="text-xl font-bold text-gray-900 mb-6">Frukt och fria kalorier</h3>
+        
+        <div className="grid md:grid-cols-2 fruit-examples-grid gap-6 mb-6">
           <div>
             <p className="text-gray-700 font-medium mb-3">
               Frukt kcal per dag:
             </p>
-            <div className="space-y-1 mb-1">
+            <div className="space-y-1">
               <p className="text-gray-900 font-semibold">
                 {client1Name}: {Math.round(metrics.fruktKcalPerDag[0])} kcal
               </p>
@@ -69,6 +70,22 @@ export default function HeaderCard({
             </div>
           </div>
 
+          <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+            <p className="text-gray-700 font-semibold mb-2">Fruktexempel (ca kcal):</p>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-gray-800">
+              <span>• Äpple (150g): ~80 kcal</span>
+              <span>• Banan (120g): ~100 kcal</span>
+              <span>• Apelsin (150g): ~60 kcal</span>
+              <span>• Päron (150g): ~85 kcal</span>
+              <span>• Kiwi (100g): ~60 kcal</span>
+              <span>• Blåbär (150g): ~85 kcal</span>
+              <span>• Jordgubbar (150g): ~50 kcal</span>
+              <span>• Druvor (100g): ~70 kcal</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-6">
           <div>
             <p className="text-gray-700 font-medium mb-3">
               Fria kcal per vecka:

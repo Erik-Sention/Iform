@@ -9,64 +9,54 @@ export default function WeekSchedule({
   schedule,
   weeks,
 }: WeekScheduleProps) {
-  const days = [
-    "måndag",
-    "tisdag",
-    "onsdag",
-    "torsdag",
-    "fredag",
-    "lördag",
-    "söndag",
-  ];
-
-  const dayNames: { [key: string]: string } = {
-    måndag: "Måndag",
-    tisdag: "Tisdag",
-    onsdag: "Onsdag",
-    torsdag: "Torsdag",
-    fredag: "Fredag",
-    lördag: "Lördag",
-    söndag: "Söndag",
-  };
-
   const weekText = weeks ? `Veckoschema (${weeks})` : "Veckoschema";
 
+  // Använd måndag som typ A och tisdag som typ B (representativa dagar)
+  const typeASchedule = schedule["måndag"];
+  const typeBSchedule = schedule["tisdag"];
+  
   return (
     <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
       <h2 className="text-3xl font-bold text-gray-900 mb-6">
         {weekText}
       </h2>
 
-      <div className="space-y-6">
-        {days.map((day) => {
-          const daySchedule = schedule[day];
-          return (
-            <div
-              key={day}
-              className="border-l-4 border-accent-500 pl-6 py-2 bg-gray-50 rounded-r-lg"
-            >
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                {dayNames[day]}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {daySchedule.times.map((time, idx) => (
-                  <div key={idx} className="inline-flex items-center">
-                    <span className="text-accent-700 font-semibold">
-                      {time}
-                    </span>
-                    <span className="mx-2 text-gray-800">
-                      {daySchedule.meals[idx]}
-                    </span>
-                    {idx < daySchedule.times.length - 1 && (
-                      <span className="text-gray-400 mx-1">·</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        })}
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="border-b-2 border-gray-300">
+              <th className="text-left py-3 px-4 text-gray-700 font-semibold text-base bg-gray-50">
+                Tid
+              </th>
+              <th className="text-left py-3 px-4 text-gray-700 font-semibold text-base bg-blue-50">
+                Mån · Ons · Fre · Sön
+              </th>
+              <th className="text-left py-3 px-4 text-gray-700 font-semibold text-base bg-green-50">
+                Tis · Tor · Lör
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {typeASchedule.times.map((time, idx) => (
+              <tr 
+                key={idx}
+                className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+              >
+                <td className="py-3 px-4 font-semibold text-accent-700 bg-gray-50">
+                  {time}
+                </td>
+                <td className="py-3 px-4 text-gray-800 bg-blue-50/30">
+                  {typeASchedule.meals[idx]}
+                </td>
+                <td className="py-3 px-4 text-gray-800 bg-green-50/30">
+                  {typeBSchedule.meals[idx]}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+
     </div>
   );
 }
