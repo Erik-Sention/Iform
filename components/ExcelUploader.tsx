@@ -33,6 +33,12 @@ export default function ExcelUploader({ onDataLoaded, currentRecipes, printButto
     const file = event.target.files?.[0];
     if (!file) return;
 
+    // Om en fil redan är uppladdad, ladda om sidan innan ny uppladdning
+    if (fileName) {
+      window.location.reload();
+      return;
+    }
+
     setIsUploading(true);
     setFileName(file.name);
 
@@ -217,7 +223,6 @@ export default function ExcelUploader({ onDataLoaded, currentRecipes, printButto
             <div className="text-blue-50 text-sm space-y-1">
               <p>1. Ladda upp din kunds Excel-fil för att fylla i all kundspecifik data automatiskt</p>
               <p>2. Klicka på <span className="font-semibold">Spara som PDF</span> när du vill exportera</p>
-              <p className="text-xs italic">Tips: Du kan klicka på knappen när som helst - PDF:en skapas automatiskt när allt är klart</p>
               <p>3. Döp filen till: <span className="font-semibold">Iform [Period#] [Klient1] [Klient2] ååmmdd</span></p>
               <p>4. Den skapade PDF-filen hittar du sedan i mappen för nedladdningar</p>
             </div>

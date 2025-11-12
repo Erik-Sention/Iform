@@ -12,6 +12,7 @@ import RecipeCard from "@/components/RecipeCard";
 import SnacksSection from "@/components/SnacksSection";
 import ExcelUploader from "@/components/ExcelUploader";
 import PrintButton from "@/components/PrintButton";
+import RecipeSelector from "@/components/RecipeSelector";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 
 interface PeriodContentProps {
@@ -21,6 +22,11 @@ interface PeriodContentProps {
 export default function PeriodContent({ initialData }: PeriodContentProps) {
   const [data, setData] = useState<PeriodData>(initialData);
   const printRef = useRef<HTMLDivElement>(null);
+  
+  // State för valda recept - initialt är alla valda
+  const [selectedRecipes, setSelectedRecipes] = useState<Set<string>>(
+    new Set(initialData.recipes.map((r) => r.id))
+  );
 
   const handleDataLoaded = (uploadedData: Partial<PeriodData>) => {
     setData((prev) => ({
@@ -30,12 +36,20 @@ export default function PeriodContent({ initialData }: PeriodContentProps) {
       metrics: uploadedData.metrics || prev.metrics,
       recipes: uploadedData.recipes || prev.recipes,
     }));
+    
+    // När ny data laddas, välj alla recept som default
+    if (uploadedData.recipes) {
+      setSelectedRecipes(new Set(uploadedData.recipes.map((r) => r.id)));
+    }
   };
 
-  const recipesA = data.recipes.filter((r) => r.category === "A");
-  const recipesB = data.recipes.filter((r) => r.category === "B");
+  // Filtrera recept baserat på vad som är valt
+  const recipesA = data.recipes
+    .filter((r) => r.category === "A" && selectedRecipes.has(r.id));
+  const recipesB = data.recipes
+    .filter((r) => r.category === "B" && selectedRecipes.has(r.id));
 
-  // Samla alla bild-URLs som behöver laddas för PDF
+  // Samla alla bild-URLs som behöver laddas för PDF (bara valda recept)
   const imageUrls = useMemo(() => {
     const staticImages = [
       "/images/AktivtusBackgroundGrey.png",
@@ -43,13 +57,14 @@ export default function PeriodContent({ initialData }: PeriodContentProps) {
       "/images/Aktivitus-Blue.png",
     ];
 
-    // Lägg till alla recept-bilder
+    // Lägg till bara bilder för valda recept
     const recipeImages = data.recipes
+      .filter((recipe) => selectedRecipes.has(recipe.id))
       .map((recipe) => recipe.image)
       .filter((image): image is string => Boolean(image));
 
     return [...staticImages, ...recipeImages];
-  }, [data.recipes]);
+  }, [data.recipes, selectedRecipes]);
 
   // Använd image preloader hook
   const { allImagesLoaded, loadingProgress } = useImagePreloader(imageUrls);
@@ -77,6 +92,14 @@ export default function PeriodContent({ initialData }: PeriodContentProps) {
                 loadingProgress={loadingProgress}
               />
             }
+          />
+        </div>
+
+        <div className="no-print">
+          <RecipeSelector
+            recipes={data.recipes}
+            selectedRecipes={selectedRecipes}
+            onSelectionChange={setSelectedRecipes}
           />
         </div>
 
@@ -155,39 +178,43 @@ export default function PeriodContent({ initialData }: PeriodContentProps) {
             />
           </div>
 
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 print-category-header">
-              Måltider kategori A
-            </h2>
-            <div className="grid md:grid-cols-2 print:grid-cols-1 gap-6">
-              {recipesA.map((recipe) => (
-                <div key={recipe.id} className="print-recipe-card">
-                  <RecipeCard 
-                    recipe={recipe}
-                    client1Name={data.clients[0].name}
-                    client2Name={data.clients[1].name}
-                  />
-                </div>
-              ))}
+          {recipesA.length > 0 && (
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 print-category-header">
+                Måltider kategori A
+              </h2>
+              <div className="grid md:grid-cols-2 print:grid-cols-1 gap-6">
+                {recipesA.map((recipe) => (
+                  <div key={recipe.id} className="print-recipe-card">
+                    <RecipeCard 
+                      recipe={recipe}
+                      client1Name={data.clients[0].name}
+                      client2Name={data.clients[1].name}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 print-category-header">
-              Måltider kategori B
-            </h2>
-            <div className="grid md:grid-cols-2 print:grid-cols-1 gap-6">
-              {recipesB.map((recipe) => (
-                <div key={recipe.id} className="print-recipe-card">
-                  <RecipeCard 
-                    recipe={recipe}
-                    client1Name={data.clients[0].name}
-                    client2Name={data.clients[1].name}
-                  />
-                </div>
-              ))}
+          {recipesB.length > 0 && (
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 print-category-header">
+                Måltider kategori B
+              </h2>
+              <div className="grid md:grid-cols-2 print:grid-cols-1 gap-6">
+                {recipesB.map((recipe) => (
+                  <div key={recipe.id} className="print-recipe-card">
+                    <RecipeCard 
+                      recipe={recipe}
+                      client1Name={data.clients[0].name}
+                      client2Name={data.clients[1].name}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Footer Image */}
           <div className="mt-12 mb-8 print-avoid-break">
